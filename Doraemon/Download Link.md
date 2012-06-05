@@ -6,7 +6,7 @@
 
 一个典型的百宝袋下载链接应该是这样子的：
 
-	<a href="app.apk#name=app&image=%2Fimages%2Fapp-icon.png" rel="download">Download</a>
+	<a href="app.apk#type=apps&name=app&image=%2Fimages%2Fapp-icon.png" rel="download">Download</a>
 
 豌豆荚百宝袋会对 `a` 标签中的如下信息作出响应：
 
@@ -21,6 +21,20 @@
 豌豆荚可以通过 `href` 属性获取到下载地址，但无法获取到下载内容的相关信息（meta data），例如说是应用的图标。这些信息可以以键值对（key-value）的形式在 `#` 后面的锚点传递给豌豆荚，使用起来类似于查询字符串（query string）。
 
 豌豆荚对可以处理锚点里面的这些键值：
+
+### type
+
+类型，用来标示下载文件的数据类型。
+
+apps：apk文件
+
+music：音乐
+
+photo：图片
+
+video：视频
+
+book：电子书
 
 ### name
 
