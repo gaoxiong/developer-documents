@@ -50,4 +50,14 @@
 
 ### content-disposition
 
-文件名。必须以 HTTP header 的 `content-disposition` 取值格式提供，即 `attachment; filename=filename.txt`。
+文件处置方式。必须以 HTTP header 的 `content-disposition` 取值格式提供，即 `attachment; filename="filename.txt"; filepath="/sdcard"; `。
+
+根据[标准](http://www.iana.org/assignments/mail-cont-disp/mail-cont-disp.xml)，`content-disposition` 的取值必须有一个值（value）和任意多个参数（parameter）组成。豌豆荚要求值（value）必须是 `attachment`。豌豆荚支持的参数（parameter）包括 `filename` 和 `filepath`。
+
+#### filename
+
+文件名。豌豆荚在考虑文件保存为什么文件名时，会参考这一参数。如果这一参数不是系统（豌豆荚 Windows 版需要同时考虑 Windows 和 Android）有效的文件名，则豌豆荚会做出必要的调整。
+
+#### filepath
+
+文件路径。豌豆荚在考虑文件保存路径时，会参考这一参数。由于下载资源是提供给 Android 设备使用的，所以这里的文件路径应该基于 Android 文件系统。
