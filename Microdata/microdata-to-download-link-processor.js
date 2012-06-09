@@ -22,22 +22,30 @@
             var link = links[i];
             link.setAttribute('rel', 'download');
             
+            var hash = {};
+            link.hash.replace(/[\#\&]([^=^&]*)=([^&]*)/g, function(whole, key, value) {
+                hash[key] = value;
+                return whole;
+            })
+            
             var scopeElement = getNearestScopeElement(link);
             var itemProps = getItemProps(scopeElement);
-            
-            var hashSegments = [];
-            if (itemProps.name) {
-                hashSegments.push('name=' + encodeURIComponent(itemProps.name));
+            if (itemProps.name && !hash.name) {
+                hash.name = encodeURIComponent(itemProps.name);
             }
-            if (itemProps.image || itemProps.thumbnailUrl) {
-                /* thumbnail/image is not supported until nested properties is supported */
-                hashSegments.push('image=' + encodeURIComponent(itemProps.image || itemProps.thumbnailUrl));
+            if ((itemProps.image || itemProps.thumbnailUrl || itemProps.thumbnail.image) && !hash.image) {
+                hash.image = encodeURIComponent(itemProps.image || itemProps.thumbnailUrl || itemProps.thumbnail.image)
             }
-            if (itemProps.fileSize || itemProps.contentSize) {
-                hashSegments.push('size=' + encodeURIComponent(itemProps.fileSize || itemProps.contentSize));
+            if ((itemProps.fileSize || itemProps.contentSize) && !hash['content-length']) {
+                hash['content-length'] = encodeURIComponent(itemProps.fileSize || itemProps.contentSize);
             }
             
-            link.hash = hashSegments.join('&');
+            var hashArray = [];
+            for (var key in hash) {
+                hashArray.push(key + '=' +hash[key]);
+            }
+            
+            link.hash = '#' + hashArray.join('&');
         }
     };
     
@@ -72,7 +80,7 @@
         
         if (propElement.hasAttribute('itemscope')) {
             /* embedded struct */
-            // TODO: extract embedded item scope
+            property.value = getItemProps(propElement);
         } else {
             switch (propElement.nodeName) {
                 case 'META':
