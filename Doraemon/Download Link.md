@@ -4,7 +4,7 @@
 
 这个文档说明豌豆荚百宝袋如何识别下载链接，以及如何从下载链接中提取目标文件的相关信息（meta data）。
 
-一个典型的百宝袋下载链接应该是这样子的：
+一个典型的百宝袋下载链接应该是这样子的：（请注意提供给豌豆荚使用的参数键值对放在 `#` 井号后面，而非 `?` 问号后面。）
 
 	<a href="app.apk#name=app&image=%2Fimages%2Fapp-icon.png" rel="download">Download</a>
 
@@ -18,7 +18,7 @@
 
 ## href="...\#key1=value1&key2=value2"
 
-豌豆荚可以通过 `href` 属性获取到下载地址，但无法获取到下载内容的相关信息（meta data），例如说是应用的图标。这些信息可以以键值对（key-value）的形式在 `#` 后面的锚点传递给豌豆荚，使用起来类似于查询字符串（query string）。
+豌豆荚可以通过 `href` 属性获取到下载地址，但无法获取到下载内容的相关信息（meta data），例如说是应用的图标。这些信息可以以键值对（key-value）的形式在 `#` 井号（注意不是 `?` 问号）后面的锚点传递给豌豆荚，使用起来类似于查询字符串（query string）。
 
 其中有一些取值是跟 HTTP header 取值同名的，这些取值用于补充下载目标 HTTP header 不提供的信息。例如说，如果下载目标不提供 `content-disposition` header，且 URL 不包括文件名信息（如 `http://example.com/download?id=123`），浏览器就没办法获得文件名，这时候锚点后的 `content-disposition` 属性就可以用于提供此信息。
 
