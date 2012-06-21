@@ -42,7 +42,7 @@ Doraemon开发者文档
 
     4.5. 上传扩展包
 
-       访问developer.wandoujia.com，其中有上传扩展包的入口。
+       访问http://www.wandoujia.com/webstore/dev，其中有上传扩展包的入口。
 
   [manifest files]: https://github.com/wandoulabs/developer-documents/blob/master/Doraemon/Manifest%20Files.md
   [Download Link]: https://github.com/wandoulabs/developer-documents/blob/master/Doraemon/Download%20Link.md
